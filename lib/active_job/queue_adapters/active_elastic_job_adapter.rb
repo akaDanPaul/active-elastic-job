@@ -138,7 +138,7 @@ module ActiveJob
           cache_key = queue_name.to_s
           @queue_urls ||= { }
           return @queue_urls[cache_key] if @queue_urls[cache_key]
-          resp = aws_sqs_client.get_queue_url(queue_name: queue_name.to_s)
+          resp = aws_sqs_client.get_queue_url({queue_name: queue_name.to_s})
           @queue_urls[cache_key] = resp.queue_url
         rescue AWS::SQS::Errors::NonExistentQueue => e
           raise NonExistentQueue.new(queue_name, aws_region)
