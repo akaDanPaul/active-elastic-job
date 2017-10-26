@@ -9,7 +9,7 @@ class TestJob < ActiveJob::Base
   end
 end
 
-describe Aws::SQS::Client do
+describe AWS::SQS::Client do
   subject(:aws_client)  { aws_sqs_client}
 
   it "is configured with valid credentials and region" do
@@ -66,7 +66,7 @@ describe Aws::SQS::Client do
               message_body: message_content,
               queue_url: queue_url
             )
-          end.to raise_error(Aws::SQS::Errors::InvalidParameterValue)
+          end.to raise_error(AWS::SQS::Errors::InvalidParameterValue)
         end
       end
     end
@@ -77,7 +77,7 @@ describe Aws::SQS::Client do
         it "raises error" do
           expect do
             aws_client.get_queue_url(queue_name: queue_name)
-          end.to raise_error(Aws::SQS::Errors::NonExistentQueue)
+          end.to raise_error(AWS::SQS::Errors::NonExistentQueue)
         end
       end
     end

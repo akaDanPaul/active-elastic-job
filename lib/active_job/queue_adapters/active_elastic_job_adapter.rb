@@ -100,7 +100,7 @@ module ActiveJob
               message[:message_body],
               message[:message_attributes])
           end
-        rescue Aws::SQS::Errors::NonExistentQueue => e
+        rescue AWS::SQS::Errors::NonExistentQueue => e
           unless @queue_urls[job.queue_name.to_s].nil?
             @queue_urls[job.queue_name.to_s] = nil
             retry
@@ -140,7 +140,7 @@ module ActiveJob
           return @queue_urls[cache_key] if @queue_urls[cache_key]
           resp = aws_sqs_client.get_queue_url(queue_name: queue_name.to_s)
           @queue_urls[cache_key] = resp.queue_url
-        rescue Aws::SQS::Errors::NonExistentQueue => e
+        rescue AWS::SQS::Errors::NonExistentQueue => e
           raise NonExistentQueue.new(queue_name, aws_region)
         end
 
@@ -165,7 +165,7 @@ module ActiveJob
         end
 
         def aws_sqs_client
-          @aws_sqs_client ||= Aws::SQS::Client.new(credentials: aws_sqs_client_credentials )
+          @aws_sqs_client ||= AWS::SQS::Client.new(credentials: aws_sqs_client_credentials )
         end
 
         def aws_sqs_client_credentials

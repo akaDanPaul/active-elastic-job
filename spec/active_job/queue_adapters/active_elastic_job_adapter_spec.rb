@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'digest'
 
-class StubbedError < Aws::SQS::Errors::NonExistentQueue
+class StubbedError < AWS::SQS::Errors::NonExistentQueue
   def initialize; end;
 end
 

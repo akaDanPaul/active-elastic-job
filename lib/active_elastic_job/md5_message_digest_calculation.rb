@@ -9,7 +9,7 @@ module ActiveElasticJob
   #
   #   extend ActiveElasticJob::MD5MessageDigestCalculation
   #
-  #   resp = Aws::SQS::Client.new.send_message(
+  #   resp = AWS::SQS::Client.new.send_message(
   #     queue_url: queue_url,
   #     message_body: body,
   #     message_attributes: attributes
